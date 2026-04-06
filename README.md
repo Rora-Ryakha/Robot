@@ -7,7 +7,6 @@
 **Используемые библиотеки и технологии:**
 - NATS
 - Pybit-asyncio
-- Redis
 - PostgreSQL
 - SQLAlchemy
 - Стек Grafana
