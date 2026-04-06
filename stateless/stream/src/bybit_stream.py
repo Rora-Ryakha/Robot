@@ -168,7 +168,7 @@ class BybitOrderStreamProcessor(OrderStreamProcessor):
                 new_sl=float(stop_loss)
             )
 
-        elif status in ['Triggered', 'Deactivated']:
+        elif status in ['Triggered', 'Deactivated', 'Cancelled']:
             return None
 
         else:
