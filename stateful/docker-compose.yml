@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  nats:
+    image: nats:latest
+    container_name: nats
+    ports:
+      - "${NATS_CORE_PORT}:4222"
+    command: --port 4222
+    networks: ["robot"]
+  
+  jetstream:
+    image: nats:latest
+    container_name: jetstream
+    ports:
+      - "${NATS_JETSTREAM_PORT}:4223"
+    command: --port 4223 -js # --sd /data
+    # volumes:
+    #   - persistence:/data
+    networks: ["robot"]
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+      POSTGRES_DB: ${PG_DB_NAME}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${PG_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/pgdata
+    command: >
+      postgres -c max_connections=1000
+               -c shared_buffers=256MB
+               -c effective_cache_size=768MB
+               -c maintenance_work_mem=64MB
+               -c checkpoint_completion_target=0.7
+               -c wal_buffers=16MB
+               -c default_statistics_target=100
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${PG_USER} -d ${PG_DB_NAME}" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    networks: ["robot"]
+
+volumes:
+  pgdata:
+    driver: local
+
+networks:
+  robot:
+    name: robot

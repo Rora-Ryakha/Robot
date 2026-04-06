@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "metrics-adapter"
+version = "0.1.0"
+description = "Висит на стриме метрик из NATS и отдаёт в prometheus-формате"
+authors = ["Мясной"]
+packages = [{include = "src"}, {include = "packages", from = "../"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pybit = { git = "https://github.com/Chenger1/pybit.git" }
+prometheus-client = "^0.23.1"
+fastapi = "^0.121.0"
+uvicorn = "^0.38.0"
+nats-py = "^2.0.0"
+pydantic-settings = "^2.13.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

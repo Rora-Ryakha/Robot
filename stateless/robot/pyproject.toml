@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "robot"
+version = "0.1.0"
+description = "Торгует"
+authors = ["Мясной"]
+packages = [{include = "src"}, {include = "packages", from = "../"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pybit = { git = "https://github.com/Chenger1/pybit.git" }
+pandas = "^2.3.3"
+numpy = "^1.26.4"
+nats-py = "^2.0.0"
+catboost = "1.2.8"
+pydantic-settings = "^2.13.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

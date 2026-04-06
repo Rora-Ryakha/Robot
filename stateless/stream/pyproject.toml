@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "stream"
+version = "0.1.0"
+description = "Висит на стриме передаёт унифицированные данные в NATS"
+authors = ["Мясной"]
+packages = [{include = "src"}, {include = "packages", from = "../"}]
+
+[tool.poetry.dependencies]
+pybit = { git = "https://github.com/Chenger1/pybit.git" }
+python = "^3.10"
+nats-py = "^2.14.0"
+pydantic-settings = "^2.13.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

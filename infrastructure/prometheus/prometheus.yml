@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 3s
+
+scrape_configs:
+  - job_name: "robot-metrics"
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["metrics-adapter:8080"]
+      
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']

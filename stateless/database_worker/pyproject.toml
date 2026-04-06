@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "databaseworker"
+version = "0.1.0"
+description = "Работает с бд"
+authors = ["Мясной"]
+packages = [{include = "src"}, {include = "packages", from = "../"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pybit = { git = "https://github.com/Chenger1/pybit.git" }
+nats-py = "^2.0.0"
+sqlalchemy = "^2.0.48"
+fastapi = "^0.135.2"
+pydantic-settings = "^2.13.1"
+asyncpg = "^0.31.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
